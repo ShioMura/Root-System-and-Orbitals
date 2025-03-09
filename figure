@@ -1,0 +1,20 @@
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+# Plot p-orbitals (simplified)
+theta = np.linspace(0, 2*np.pi, 100)
+phi = np.linspace(0, np.pi, 100)
+x = np.outer(np.cos(theta), np.sin(phi))
+y = np.outer(np.sin(theta), np.sin(phi))
+z = np.outer(np.ones(100), np.cos(phi))
+ax.plot_surface(x, y, z, alpha=0.3, color='blue')
+ax.quiver(0,0,0, 1,0,0, color='red', label='$L_x$')
+ax.quiver(0,0,0, 0,1,0, color='green', label='$L_y$')
+ax.quiver(0,0,0, 0,0,1, color='purple', label='$L_z$')
+ax.set_xlabel('$m_x$'); ax.set_ylabel('$m_y$'); ax.set_zlabel('$m_z$')
+plt.legend()
+plt.savefig('so3_orbitals.pdf')
